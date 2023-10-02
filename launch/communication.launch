@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="ROV_software" type="pub.py" name="ps4_input" launch-prefix="gnome-terminal --command" />
+    <node pkg="ROV_software" type="sub.py" name="ps4_output" launch-prefix="gnome-terminal --command" />
+</launch>
