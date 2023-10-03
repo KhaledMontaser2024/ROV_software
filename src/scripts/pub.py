@@ -2,27 +2,25 @@
 import pygame
 import rospy
 import json ,os
-from std_msgs.msg import String
+from ROV_software.msg import ps4
 
-#if __name__ == '__main__':
 
+Button = ps4()
 class PS_Controller:
     def __init__(self) -> None:
         pygame.init()
         rospy.init_node("publisher")
-        self.pub=rospy.Publisher("/test",String,queue_size=1)
+        self.pub=rospy.Publisher("/PsController_signal", ps4 ,queue_size=1)
         rospy.loginfo("pub node started")    
         pygame.joystick.Joystick(0).init()
-        self.LEFT, self.RIGHT, self.DOWN, self.UP =False,False,False,False 
         
         with open(os.path.join("/home/montaser/catkin_ws/src/ROV_software/src/scripts/ps4_keys.json"), 'r+') as file:
             self.button_keys = json.load(file)
         
         while True:
-            self.ROS_Publish_event()
+            self.pub.publish(Button)
             self.event_type_check()    
         
-    
     
     def event_type_check(self):
         for event in pygame.event.get():
@@ -30,59 +28,66 @@ class PS_Controller:
                 self.Arrows(event)
             
             if event.type == pygame.JOYBUTTONDOWN:
-                self.Buttons(event)
+                self.Buttons(event,True)
 
-
-
-    def ROS_Publish_event(self):
-        if self.LEFT:
-            self.pub.publish("LEFT")
-        
-        if self.RIGHT:
-            self.pub.publish("RIGHT")
-        
-        if self.UP:
-            self.pub.publish("UP")
-        
-        if self.DOWN:
-            self.pub.publish("DOWN")
-    
+            if event.type == pygame.JOYBUTTONUP:
+                self.Buttons(event,False)
 
 
     def Arrows(self,event):
         if event.value[0] == -1:
-            self.LEFT = True
+            Button.LeftArrow = True
+
         if event.value[0] == 1:
-            self.RIGHT = True
+            Button.RightArrow = True
+
         if event.value[1] == -1:
-            self.DOWN = True
+            Button.DownArrow = True
+
         if event.value[1] == 1:
-            self.UP = True
+            Button.UpArrow = True
+
         
         if event.value[0] == 0:
-            self.LEFT = False
+            Button.LeftArrow = False
+
         if event.value[0] == 0:
-            self.RIGHT = False
+            Button.RightArrow = False
+
         if event.value[1] == 0:
-            self.DOWN = False
+            Button.DownArrow = False
+
         if event.value[1] == 0:
-            self.UP = False
+            Button.UpArrow = False
+
         
-
-
-    def Buttons(self,event):
+    def Buttons(self,event, buttonState):
+        
         if event.button == self.button_keys['x']:
-           self.pub.publish("x")
+           Button.x = buttonState
         if event.button == self.button_keys['circle']:
-            self.pub.publish("circle")
+            Button.circle = buttonState
         if event.button == self.button_keys['triangle']:
-            self.pub.publish("triangle")
+            Button.triangle = buttonState
         if event.button == self.button_keys['square']:
-            self.pub.publish("square")
+            Button.square = buttonState
         
+        if event.button == self.button_keys['L1']:
+           Button.L1 = buttonState
+        if event.button == self.button_keys['L2']:
+            Button.L2 = buttonState
+        if event.button == self.button_keys['R1']:
+            Button.R1 = buttonState
+        if event.button == self.button_keys['R2']:
+            Button.R2 = buttonState
 
-    
-
+        if event.button == self.button_keys['PS']:
+           Button.PS = buttonState
+        if event.button == self.button_keys['share']:
+            Button.share = buttonState
+        if event.button == self.button_keys['options']:
+            Button.options = buttonState
+            
 
 
 PS_Controller()
