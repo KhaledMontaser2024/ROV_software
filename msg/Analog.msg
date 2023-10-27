@@ -1,0 +1,7 @@
+float32 R2_L2_Axis
+
+float32 RightAnalog_Up_Down_Axis
+float32 RightAnalog_Left_Right_Axis
+
+float32 LeftAnalog_Up_Down_Axis
+float32 LeftAnalog_Left_Right_Axis

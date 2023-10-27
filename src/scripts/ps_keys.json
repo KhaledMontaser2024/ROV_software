@@ -1,0 +1,41 @@
+{
+    
+    "x": 0,
+    "circle": 1,
+    "triangle": 2,
+    "square": 3,
+    
+    "L1": 4,
+    "R1": 5,
+    "L3": 11,
+    "R3": 12,
+    
+    "share": 8,
+    "options": 9,
+    "PS": 10,
+    
+
+
+
+
+    "UpArrow":1,
+    "DownArrow":-1,
+    "LeftArrow":-1,
+    "RightArrow":1,
+
+
+
+    
+
+    "R2": 5,
+    "L2": 2,
+    
+    "RightAnalog_Left_Right_Axis":3,
+    "RightAnalog_Up_Down_Axis":4,
+
+    "LeftAnalog_Left_Right_Axis":0,
+    "LeftAnalog_Up_Down_Axis":1
+
+
+    
+ }
