@@ -51,7 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    ButtonsStateMessage.msg
-   Analog.msg
+   MotionMessage.msg
  )
 
 ## Generate services in the 'srv' folder

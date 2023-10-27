@@ -1,3 +1,4 @@
+uint8 L1_R1
 float32 R2_L2_Axis
 
 float32 RightAnalog_Up_Down_Axis

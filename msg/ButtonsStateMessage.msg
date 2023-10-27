@@ -8,8 +8,6 @@ bool PS
 bool share
 bool options
 
-bool L1
-bool R1
 bool L3
 bool R3
 
@@ -29,5 +27,5 @@ bool RightArrow
 
 
 ########## Analog ###############
-Analog motion
+MotionMessage motion
 ##############################
