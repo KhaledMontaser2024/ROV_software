@@ -1,6 +1,7 @@
 #this code is supposed to handle the pid impelmentaion for the ROv system
 # first declare what is required for the class (attributes ) >>constractor
-# then the code is done by using metods for each term of the pid three terms,method for calculating error , one method for the final output.
+# then the code is done by using metods for each term of the pid three terms,method for calculating error , one method for the output calculations , 
+# final pidoutput method that would be called interally in the motion script.
 #finally  a method to determine wheter to turn off i-term or keep it on by changing the sum value to 0 or keep it the same , i will wxplain it as follow :
 #the reason that make us clamp the output is mostly the i-term so why don't we just turn it off when the o/p is saturated with a flag that depends on the follows :
 #1)if the o/p of the clamping is the same as the o/p before clamping this means there was no saturation so the sat_flag is 0 if not equal the sat_flag is 1 
@@ -65,8 +66,18 @@ class Pid():
         self.p_dterm=dterm 
         return dterm
     
-    
-    def pid_output(self,controller_signal,measured_angle,maxspeed):
+    def output(self) :#method that returns the o/p value
+        self.output1 = self.p_term ()+ self.i_term()+ self.d_term() #U(n)= P(n)+I(n)+D(n) ''o/p before clamping ''
+        if (self.output1 > self.maxspeed ) : #output clamping
+            self.output2= self.maxspeed  
+            return self.output2
+        elif (self.output1 < self.minspeed):
+            self.output2=self.minspeed
+            return self.output2
+        else :
+            return self.output1
+            
+    def pid_output(self,controller_signal,measured_angle,maxspeed):#final method that would be called
         self.controller_signal = controller_signal
         self.measured_angle=measured_angle
         self.maxspeed = maxspeed #maxoutput limit 
@@ -75,15 +86,11 @@ class Pid():
         self.p_term()
         self.i_term()
         self.d_term()
-        self.output1 = self.p_term ()+ self.i_term()+ self.d_term() #U(n)= P(n)+I(n)+D(n) ''o/p before clamping ''
-        if (self.output1 > self.maxspeed ) : #output clamping
-            self.output2= self.maxspeed 
-        elif (self.output1 < self.minspeed):
-            self.output2=self.minspeed
-        return self.output2
+        self.output()
+            
 
     def clamping(self) :
-        if (self.output1 == self.output2)  :  
+        if (self.output1 == self.output())  :  
             self.sat_flag = 0 
         else :
             self.sat_flag=1 
