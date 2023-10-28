@@ -1,4 +1,0 @@
-<launch>
-    <node pkg="rov_system" type="controler_node.py" name="Ps_Node" launch-prefix="gnome-terminal --command" />
-    <node pkg="rov_system" type="caiman_node.py" name="Caymen_Node" launch-prefix="gnome-terminal --command" />
-</launch>
