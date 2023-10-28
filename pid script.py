@@ -1,7 +1,7 @@
 #this code is supposed to handle the pid impelmentaion for the ROv system
 # first declare what is required for the class (attributes ) >>constractor
 # then the code is done by using metods for each term of the pid three terms,method for calculating error , one method for the final output.
-#finally  a method to determine wheter to turn off i-term or keep it on i will wxplain it as follow :
+#finally  a method to determine wheter to turn off i-term or keep it on by changing the sum value to 0 or keep it the same , i will wxplain it as follow :
 #the reason that make us clamp the output is mostly the i-term so why don't we just turn it off when the o/p is saturated with a flag that depends on the follows :
 #1)if the o/p of the clamping is the same as the o/p before clamping this means there was no saturation so the sat_flag is 0 if not equal the sat_flag is 1 
 #2)if the sign of the error is same as the sign of the i-term that means that the i-term is increasing the o/p so the sign_flag  is 1 if not equal the sign_flag  is 0
@@ -22,26 +22,27 @@ class Pid():
         self.sign_flag = 0 #flag to determine whether the sign of the error is same as the sign of the i-term 
         self.output1 = 0 #''o/p before clamping ''
         self.output2 = 0 #''o/p after clamping ''
+        self.kp=0
+        self.ki=0
+        self.kd = 0
         
     def error_calc(self) :
         
         if (self.controller_signal !=0 ) :
             setpoint = self.measured_angle 
-            p_setpoint = setpoint 
+             
         else :
-            setpoint = p_setpoint #previous setpoint 
+            pass
         self.error = setpoint-self.measured_angle #e(n)
         return self.error
             
   
-    def p_term(self) :
-        kp = 0 
-        pterm = kp * self.error_calc() #P(n)
+    def p_term(self) : 
+        pterm = self.kp * self.error_calc() #P(n)
         
         return pterm
         
     def i_term(self) :
-        ki = 0 
         sum=self.error_calc+ self.p_error
         maxerror = 10 
         minerror = -10 
@@ -50,30 +51,35 @@ class Pid():
         elif (sum < minerror) :
             sum = minerror 
         if (self.sat_flag & self.sign_flag )==1 :#condition to determinr whether the i=term work or not 
-            iterm =  ((ki *self.ts/2 )*(sum) )+self.p_iterm #I(n)
+            iterm =  ((self.ki *self.ts/2 )*(sum) )+self.p_iterm #I(n)
         else :
-            iterm = 0 
+            sum = 0 
         self.p_error = self.error_calc() 
         self.p_iterm=iterm
         
         return iterm
         
     def d_term(self):
-        kd = 0 
-        dterm = (((2*kd )/ (2*self.tau +self.ts) )*(self.error_calc()-self.p_error))+((2*self.tau-self.ts )/ (2*self.tau +self.ts))*self.p_dterm #D(n)
+        
+        dterm = (((2*self.kd )/ (2*self.tau +self.ts) )*(self.error_calc()-self.p_error))+((2*self.tau-self.ts )/ (2*self.tau +self.ts))*self.p_dterm #D(n)
         self.p_dterm=dterm 
         return dterm
-    def pid_output(self):
-        
-        maxlimit = 255 #maxoutput limit 
-        minlimit = -255 #minoutput limit 
-        
+    
+    
+    def pid_output(self,controller_signal,measured_angle,maxspeed):
+        self.controller_signal = controller_signal
+        self.measured_angle=measured_angle
+        self.maxspeed = maxspeed #maxoutput limit 
+        self.minspeed = -1*maxspeed #minoutput limit 
+        self.error_calc()
+        self.p_term()
+        self.i_term()
+        self.d_term()
         self.output1 = self.p_term ()+ self.i_term()+ self.d_term() #U(n)= P(n)+I(n)+D(n) ''o/p before clamping ''
-        if (self.output1 > maxlimit) : #output clamping
-            self.output2= maxlimit 
-        elif (self.output1 < minlimit):
-            self.output2=minlimit
-
+        if (self.output1 > self.maxspeed ) : #output clamping
+            self.output2= self.maxspeed 
+        elif (self.output1 < self.minspeed):
+            self.output2=self.minspeed
         return self.output2
 
     def clamping(self) :
