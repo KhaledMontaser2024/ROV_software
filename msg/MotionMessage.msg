@@ -1,8 +1,10 @@
-uint8 L1_R1
-float32 R2_L2_Axis
+bool Reverse_Control
+uint8 Speed
 
-float32 RightAnalog_Up_Down_Axis
-float32 RightAnalog_Left_Right_Axis
+float32 Forward_Backward_Axis
 
-float32 LeftAnalog_Up_Down_Axis
-float32 LeftAnalog_Left_Right_Axis
+float32 Pitch_Axis
+float32 Yaw_Axis
+
+float32 Up_Down_Axis
+float32 Left_Right_Axis
