@@ -25,13 +25,17 @@ if not bno.begin():
     bno.set_calibration(data)
     file.close()
 
+
+
 print('Reading BNO055 data, press Ctrl-C to quit...')
 while True:
-    # Read the Euler angles for heading, roll, pitch (all in degrees).
-    Yaw, roll, pitch = bno.read_euler()
     # Read the calibration status, 0=uncalibrated and 3=fully calibrated.
     system, gyro, accel, mag = bno.get_calibration_status()
     # Print everything out.
-    print('Yaw={0:0.2F} Roll={1:0.2F} Pitch={2:0.2F}\tSys_cal={3} Gyro_cal={4} Accel_cal={5} Mag_cal={6}'.format(
-          Yaw, roll, pitch, system, gyro, accel, mag))
+    print('Sys_cal={3} Gyro_cal={4} Accel_cal={5} Mag_cal={6}'.format(system, gyro, accel, mag))
+    if(system==3&gyro==3&accel==3&mag==3):
+        file = open("data_stored.json", "x")
+        calibration_data = bno.get_calibration()
+        json.dump(calibration_data, file)
+        break
     time.sleep(0.02)
