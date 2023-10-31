@@ -1,6 +1,6 @@
 #this code is supposed to handle the pid impelmentaion for the ROv system
 # first declare what is required for the class (attributes ) >>constractor
-# then the code is done by using metods for each term of the pid three terms,method for calculating error , one method for the output calculations , 
+# then the code is done by using metods for each term of the pid three terms,method for calculating error(choosing the smallest error) , one method for the output calculations , 
 # final pidoutput method that would be called interally in the motion script.
 #finally  a method to determine wheter to turn off i-term or keep it on by changing the sum value to 0 or keep it the same , i will wxplain it as follow :
 #the reason that make us clamp the output is mostly the i-term so why don't we just turn it off when the o/p is saturated with a flag that depends on the follows :
@@ -12,7 +12,7 @@ import time
 class Pid():
     def __init__(self,controller_signal,measured_angle) :
         self.controller_signal = controller_signal
-        self.ts=100
+        self.ts=.100
         self.tau=.02
         self.measured_angle=measured_angle
         self.error = 0  #e(n)
@@ -34,6 +34,18 @@ class Pid():
              
         else :
             pass
+        if (self.measured_angle < 0  & self.measured_angle  > -180 ) :#choosing the smallest angle 
+            {
+              self.measured_angle = self.measured_angle + 360   
+            }
+        elif (self.measured_angle=180 | self.measured_angle=-180 ):
+            {
+                self.measured_angle= 180
+            }
+       else :
+            {
+                self.measured_angle= self.measured_angle
+            }
         self.error = setpoint-self.measured_angle #e(n)
         return self.error
             
