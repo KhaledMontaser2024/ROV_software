@@ -21,20 +21,18 @@ class motion:
         self.BBR = 0
         self.BBL = 0
         
-        self.thrusters = [None] * 8
+        self.thrusters = [self.TFR, self.TFL, self.TBR, self.TBL, self.BFR, self.BFL, self.BBR, self.BBL]
     
     def motion_eqn(self):
-        self.TFR = (( self.forward_backward / 2) - self.slide - self.up_down + self.roll - self.yaw + self.pitch) * self.max_speed
-        self.TFL = (( self.forward_backward / 2) + self.slide - self.up_down - self.roll + self.yaw + self.pitch) * self.max_speed
-        self.TBR = ((-self.forward_backward / 2) - self.slide - self.up_down + self.roll + self.yaw - self.pitch) * self.max_speed
-        self.TBL = ((-self.forward_backward / 2) + self.slide - self.up_down - self.roll - self.yaw - self.pitch) * self.max_speed
+        self.thrusters[0] = (( self.forward_backward / 2) - self.slide - self.up_down + self.roll - self.yaw + self.pitch) * self.max_speed #TFR
+        self.thrusters[1] = (( self.forward_backward / 2) + self.slide - self.up_down - self.roll + self.yaw + self.pitch) * self.max_speed #TFL
+        self.thrusters[2] = ((-self.forward_backward / 2) - self.slide - self.up_down + self.roll + self.yaw - self.pitch) * self.max_speed #TBR
+        self.thrusters[3] = ((-self.forward_backward / 2) + self.slide - self.up_down - self.roll - self.yaw - self.pitch) * self.max_speed #TBL
         
-        self.BFR = ((-self.forward_backward / 2) - self.slide + self.up_down - self.roll - self.yaw - self.pitch) * self.max_speed
-        self.BFL = ((-self.forward_backward / 2) + self.slide + self.up_down + self.roll + self.yaw - self.pitch) * self.max_speed
-        self.BBR = (( self.forward_backward / 2) - self.slide + self.up_down - self.roll + self.yaw + self.pitch) * self.max_speed
-        self.BBL = (( self.forward_backward / 2) + self.slide + self.up_down + self.roll - self.yaw + self.pitch) * self.max_speed
-        
-        self.thrusters = [self.TFR, self.TFL, self.TBR, self.TBL, self.BFR, self.BFL, self.BBR, self.BBL]
+        self.thrusters[4] = ((-self.forward_backward / 2) - self.slide + self.up_down - self.roll - self.yaw - self.pitch) * self.max_speed #BFR
+        self.thrusters[5] = ((-self.forward_backward / 2) + self.slide + self.up_down + self.roll + self.yaw - self.pitch) * self.max_speed #BFL
+        self.thrusters[6] = (( self.forward_backward / 2) - self.slide + self.up_down - self.roll + self.yaw + self.pitch) * self.max_speed #BBR
+        self.thrusters[7] = (( self.forward_backward / 2) + self.slide + self.up_down + self.roll - self.yaw + self.pitch) * self.max_speed #BBL
     
     def add_PID(self):
         x = 0
