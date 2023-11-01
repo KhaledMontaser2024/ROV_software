@@ -27,7 +27,9 @@ class GUI(QMainWindow):
         self.switch_buttons.clicked.connect(self.switch_func)
 
         
-        self.switch = 1
+        self.switch = 1   #used to switch between stacked wideget of timer and slider  
+        self.counter_time=0  #used to convert sec  to minutes in timer  
+        self.counter_time_mession=0
 
 
         self.mession=QTimer()
@@ -48,13 +50,16 @@ class GUI(QMainWindow):
        self.timer.stop()
 
     def reset_timer(self):
-         self.elapsed_time = 0
-         self.update_display()
+            self.timerlcd.display(0)
+            self.elapsed_time=0
+            self.counter_mession=0
+            self.update_display()
   
     def update_display(self):
         self.elapsed_time += 1
-         
-        self.timerlcd.display(self.elapsed_time)   
+        if self.elapsed_time_mession %60 ==0 :
+            self.counter_time+=1
+            self.timerlcd.display(self.counter_time) 
 
        
 
@@ -63,13 +68,17 @@ class GUI(QMainWindow):
         self.mession.start(1000)
     def update_mession(self):
          self.elapsed_time_mession += 1
-         self.timer_mession.display(self.elapsed_time_mession)
+         if self.elapsed_time_mession %60 ==0 :
+            self.counter_time_mession+=1
+            self.timer_mession.display(self.counter_time_mession)
 
     def stop_mession(self):
        self.mession.stop()
 
     def reset_mession(self):
-         self.elapsed_time_mession = 0
+         self.timer_mession.display(0)
+         self.elapsed_time_mession=0
+         self.counter_time_mession=0
          self.update_mession()
  
 
