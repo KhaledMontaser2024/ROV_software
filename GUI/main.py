@@ -1,15 +1,20 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QStackedWidget
 from pathlib import Path
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QResource
+from background_rc import*
+from logo_rc import*
+import os
+QResource.registerResource("background.qrc")
+QResource.registerResource("logo.qrc")
 flage=0
 
 class GUI(QMainWindow):
     def __init__(self, parent=None):
         super(GUI, self).__init__(parent)
-        self.script_dir = Path(__file__).resolve().parent
-        self.gui_path = self.script_dir / 'gui.ui'
-        uic.loadUi(str(self.gui_path), self)
+        self.script_dir = os.path.abspath(os.path.dirname(__file__))
+        self.gui_path = os.path.join(self.script_dir, 'gui.ui')        
+        uic.loadUi(self.gui_path, self)
 
         self.start_timer_button.clicked.connect(self.start_timer)
         self.stop_timer_button.clicked.connect(self.stop_timer)
