@@ -50,6 +50,32 @@ class GUI(QMainWindow):
           self.timer_mession.display(self.elapsed_time)
         elif self.flage==2 :
             self.timerlcd.display(self.elapsed_time)
+    
+    def setup_sliders(self):
+        self.horizontalSlider.setRange(0,20)
+        self.horizontalSlider_2.setRange(0,20)
+        self.horizontalSlider_3.setRange(0,20)
+        self.horizontalSlider_4.setRange(0,20)
+        self.horizontalSlider.setSingleStep(0.1)
+        self.horizontalSlider_2.setSingleStep(0.1)
+        self.horizontalSlider_3.setSingleStep(0.1)
+        self.horizontalSlider_4.setSingleStep(0.1)
+        self.horizontalSlider.valueChanged.connect(self.update_sliders1)
+        self.horizontalSlider_2.valueChanged.connect(self.update_sliders2)
+        self.horizontalSlider_3.valueChanged.connect(self.update_sliders3)
+        self.horizontalSlider_4.valueChanged.connect(self.update_sliders4)
+
+    def update_sliders1(self,value):
+        self.label_15.setText(str(value))
+    def update_sliders2(self,value):
+        self.label_12.setText(str(value))
+    def update_sliders3(self,value):
+        self.label_13.setText(str(value))
+    def update_sliders4(self,value):
+        self.label_14.setText(str(value))
+    
+    
+        
 
 app = QApplication([])
 window = QStackedWidget()
