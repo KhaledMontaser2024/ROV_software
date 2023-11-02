@@ -1,6 +1,6 @@
 #this code is supposed to handle the pid impelmentaion for the ROv system
 # first declare what is required for the class (attributes ) >>constractor
-# then the code is done by using metods for each term of the pid three terms,method for calculating error(choosing the smallest error) , one method for the output calculations , 
+# then the code is done by using metods for each term of the pid three terms,method for calculating error(and choosing the smallest error) , one method for the output calculations , 
 # final pidoutput method that would be called interally in the motion script.
 #finally  a method to determine wheter to turn off i-term or keep it on by changing the sum value to 0 or keep it the same , i will wxplain it as follow :
 #the reason that make us clamp the output is mostly the i-term so why don't we just turn it off when the o/p is saturated with a flag that depends on the follows :
@@ -31,25 +31,23 @@ class Pid():
         
         if (self.controller_signal !=0 ) :
             setpoint = self.measured_angle 
-             
         else :
             pass
-        if (self.measured_angle < 0  & self.measured_angle  > -180 ) :#choosing the smallest angle 
+        if (self.setpoint - self.measured_angle )>180 :#choosing the smallest angle 
             {
-              self.measured_angle = self.measured_angle + 360   
+                self.measured_angle = self.measured_angle - 360  
             }
-        elif (self.measured_angle=180 | self.measured_angle=-180 ):
+        elif (self.setpoint - self.measured_angle )<-180:
             {
-                self.measured_angle= 180
+                self.measured_angle = self.measured_angle +360 
             }
-       else :
+        else :
             {
                 self.measured_angle= self.measured_angle
             }
         self.error = setpoint-self.measured_angle #e(n)
         return self.error
             
-  
     def p_term(self) : 
         pterm = self.kp * self.error_calc() #P(n)
         
@@ -63,7 +61,7 @@ class Pid():
             sum = maxerror
         elif (sum < minerror) :
             sum = minerror 
-        if (self.sat_flag & self.sign_flag )==1 :#condition to determinr whether the i=term work or not 
+        if (self.sat_flag and self.sign_flag )==1 :#condition to determinr whether the i=term work or not 
             iterm =  ((self.ki *self.ts/2 )*(sum) )+self.p_iterm #I(n)
         else :
             sum = 0 
@@ -107,9 +105,9 @@ class Pid():
         else :
             self.sat_flag=1 
         
-        if (self.error > 0) & (self.i_term() >0) : 
+        if (self.error > 0) and (self.i_term() >0) : 
             self.sign_flag =  1 
-        elif (self.error < 0) & (self.i_term() < 0) : 
+        elif (self.error < 0) and (self.i_term() < 0) : 
             self.sign_flag =  1       
         else :
             self.sign_flag =  0
