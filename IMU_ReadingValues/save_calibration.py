@@ -6,7 +6,6 @@ import json
 import os
 from Adafruit_BNO055 import BNO055
 
-
 # Create and configure the BNO sensor connection.  Make sure the port number is correct
 bno = BNO055.BNO055(serial_port='/dev/ttyUSB0')
 
@@ -32,8 +31,10 @@ while True:
     # Read the calibration status, 0=uncalibrated and 3=fully calibrated.
     system, gyro, accel, mag = bno.get_calibration_status()
     # Print everything out.
-    print('Sys_cal={3} Gyro_cal={4} Accel_cal={5} Mag_cal={6}'.format(system, gyro, accel, mag))
-    if(system==3&gyro==3&accel==3&mag==3):
+    print(f"{time.time()}", 'Sys_cal={} Gyro_cal={} Accel_cal={} Mag_cal={}'.format(system, gyro, accel, mag))
+    
+    if ((system==3) and (gyro==3) and (accel==3) and (mag==3)):
+        print("saving")
         file = open("data_stored.json", "x")
         calibration_data = bno.get_calibration()
         json.dump(calibration_data, file)

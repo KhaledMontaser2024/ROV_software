@@ -20,10 +20,10 @@ if not bno.begin():
     raise RuntimeError('Failed to initialize BNO055! Is the sensor connected?')
 
 #save calibration if the file empty if not set the save calibration.
-    file = open ('data_stored.json', "r")
-    data = json.loads(file.read())
-    bno.set_calibration(data)
-    file.close()
+file = open ('data_stored.json', "r")
+data = json.loads(file.read())
+bno.set_calibration(data)
+file.close()
 
 print('Reading BNO055 data, press Ctrl-C to quit...')
 while True:
