@@ -1,3 +1,9 @@
+##############################################################################################
+#these script for gui code and have main class called gui and some func 1-start which used to start timmer 2-stop which stop the timmer 3- display_motion /timer which used to desplay time on lcd number in gui
+# and have switch func which used to switch betwwen 2 stacked widget the first widget is used to desplay timer and the scond used to desplay slider 
+#we have some variables 1-switch which used to handel the switch between the 2 pages in stacked widget 2-counter_time and mession which used to convert from sec to munits
+#3-elapsed time which used increase the time every sec
+###################################################################################################
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QStackedWidget
 from pathlib import Path
