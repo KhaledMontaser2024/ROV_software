@@ -90,7 +90,7 @@ class motion:
             scale = self.max_speed / max_val
         
         self.thrusters = [element * scale for element in self.thrusters]
-    
+    # the "output" method is the only method you are going touse in this class as it uses all other methods and then eturning the final output "thrusters" array as 8 floats.
     def output(self, forward_backward, up_down, slide, yaw, pitch, max_speed, reverse_motion, measured_yaw_angle, measured_pitch_angle):
         self.forward_backward = forward_backward
         self.up_down = up_down
