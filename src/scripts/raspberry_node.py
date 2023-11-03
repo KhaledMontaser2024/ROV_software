@@ -1,6 +1,15 @@
 #! /usr/bin/python3
+
+
+##############################################################################################
+## this script is the main ROV Script that gether all data from differnt scripts            ##
+## and direct them toward its distenation                                                   ##
+## here we have the main ROS link node that connect Raspberry with IMU sensor and arduino   ##
+## to main laptop node on station                                                           ##
+##############################################################################################
+
 import rospy
-from rov_system.msg import ButtonsStateMessage,IMU,raspberry
+from rov_system.msg import IMU,raspberry
 
 class Raspberry():
     def __init__(self) -> None:
