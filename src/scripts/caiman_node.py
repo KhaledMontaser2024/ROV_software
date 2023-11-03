@@ -10,8 +10,11 @@
 import rospy
 from rov_system.msg import ButtonsStateMessage,IMU,raspberry
 from ROV_motion import motion
-class Caiman():
+from qtpy.QtCore import QThread,pyqtSignal
+class Caiman(QThread):
     def __init__(self) -> None:
+
+        self.signalcommand=pyqtSignal()
 
         ## variables to store msgs with ROS costom data types ##
         self.ImuReads=IMU()
@@ -31,10 +34,14 @@ class Caiman():
         self.RaspberrySubscriber  = rospy.Subscriber ("/Rasp_to_Caiman",IMU,self.IMU_Handler)
         ###############################################################################################
 
-        rospy.spin()
+    def run(self) -> None:
+        while True:
+            pass
 
-    
+
     def commandsHandler(self, msg):
+        
+        self.signalcommand.emit(self.motion)
         ##### here we call motion method and pass its paramiters then store its returned list ###########
         self.motion = self.motionClass.output(msg.MotionData.Forward_Backward_Axis,msg.MotionData.Up_Down_Axis,msg.MotionData.Left_Right_Axis,msg.MotionData.Yaw_Axis,msg.MotionData.Pitch_Axis,msg.MotionData.Speed,msg.MotionData.Reverse_Control,self.ImuReads.yaw_angle,self.ImuReads.pitch_angle)
         self.motion.insert(8,msg.ArduinoData) #### at the same list we add (LED and Grippers signals)
@@ -50,6 +57,3 @@ class Caiman():
         self.ImuReads=msg
     ############################################################################
 
-
-
-Caiman()
