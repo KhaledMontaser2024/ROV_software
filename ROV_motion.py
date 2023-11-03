@@ -24,7 +24,7 @@ class motion:
         self.BBR = 0 # bot back  right 
         self.BBL = 0 # bot back  left 
         
-        self.yaw_PID =  PID_script.Pid(self.yaw, self.measured_yaw_angle, self.max_speed)
+        self.yaw_PID   =  PID_script.Pid(self.yaw, self.measured_yaw_angle, self.max_speed)
         self.pitch_PID =  PID_script.Pid(self.pitch, self.measured_pitch_angle, self.max_speed)
         
         self.thrusters = [self.TFR, self.TFL, self.TBR, self.TBL, self.BFR, self.BFL, self.BBR, self.BBL]
@@ -61,20 +61,20 @@ class motion:
             self.thrusters[2] += +yaw_PID_add - pitch_PID_add #TBR
             self.thrusters[3] += -yaw_PID_add - pitch_PID_add #TBL
             
-            self.thrusters[4] += -yaw_PID_add - pitch_PID_add
-            self.thrusters[5] += +yaw_PID_add - pitch_PID_add
-            self.thrusters[6] += +yaw_PID_add + pitch_PID_add
-            self.thrusters[7] += -yaw_PID_add + pitch_PID_add
+            self.thrusters[4] += -yaw_PID_add - pitch_PID_add #BFR
+            self.thrusters[5] += +yaw_PID_add - pitch_PID_add #BFL
+            self.thrusters[6] += +yaw_PID_add + pitch_PID_add #BBR
+            self.thrusters[7] += -yaw_PID_add + pitch_PID_add #BBL
         else:
-            self.thrusters[0] += -yaw_PID_add - pitch_PID_add
-            self.thrusters[1] += +yaw_PID_add - pitch_PID_add
-            self.thrusters[2] += +yaw_PID_add + pitch_PID_add
-            self.thrusters[3] += -yaw_PID_add + pitch_PID_add
+            self.thrusters[0] += -yaw_PID_add - pitch_PID_add #TFR
+            self.thrusters[1] += +yaw_PID_add - pitch_PID_add #TFL
+            self.thrusters[2] += +yaw_PID_add + pitch_PID_add #TBR
+            self.thrusters[3] += -yaw_PID_add + pitch_PID_add #TBL
             
-            self.thrusters[4] += -yaw_PID_add + pitch_PID_add
-            self.thrusters[5] += +yaw_PID_add + pitch_PID_add
-            self.thrusters[6] += +yaw_PID_add - pitch_PID_add
-            self.thrusters[7] += -yaw_PID_add - pitch_PID_add
+            self.thrusters[4] += -yaw_PID_add + pitch_PID_add #BFR
+            self.thrusters[5] += +yaw_PID_add + pitch_PID_add #BFL
+            self.thrusters[6] += +yaw_PID_add - pitch_PID_add #BBR
+            self.thrusters[7] += -yaw_PID_add - pitch_PID_add #BBL
     
     def check_speed(self):
         max_val = max(map(abs, self.thrusters))
