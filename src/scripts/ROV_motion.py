@@ -108,5 +108,7 @@ class motion:
         self.motion_eqn()
         self.add_PID()
         self.check_speed()
+        
+        self.char_thrusters_array = [chr(int(self.thrusters)) for x in float_array] # converting an array of floats to an array of characters for better communication.
 
-        return self.thrusters
+        return self.char_thrusters_array
