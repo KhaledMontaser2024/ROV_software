@@ -15,6 +15,7 @@ class Raspberry():
     def __init__(self) -> None:
         
         rospy.init_node("Raspberry_node")        
+        
         self.ControlSubscriber=rospy.Subscriber("/IMU_to_Raspberry",IMU,self.IMU_data_buffer)
         self.CaimanSubscriber=rospy.Subscriber("/Caiman_to_Raspberry",raspberry,self.Command_buffer)
         

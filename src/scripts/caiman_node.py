@@ -21,7 +21,7 @@ class Caiman(QThread):
         self.motion=raspberry()
         #########################################################
         
-        self.motionClass = motion()     # importing motion class for further use 
+        self.motionClass = motion(0,0,0,0,0,0,0,0,0)     # importing motion class for further use 
 
         rospy.init_node("Station_Node")
         
