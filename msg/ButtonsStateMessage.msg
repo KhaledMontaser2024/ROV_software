@@ -1,4 +1,4 @@
 
 uint8 CommunicationData
-uint16 ArduinoData
+uint8 ArduinoData
 MotionMessage MotionData

@@ -1,18 +1,17 @@
 #! /usr/bin/python3
 import rospy
-from sensor_msgs.msg import Imu
-from rov_system.msg import ButtonsStateMessage
+from rov_system.msg import ButtonsStateMessage,IMU,raspberry
 
 class Raspberry():
     def __init__(self) -> None:
         
         rospy.init_node("Raspberry_node")        
-        self.ControlSubscriber=rospy.Subscriber("/IMU_to_Raspberry",Imu,self.IMU_data_buffer)
-        self.CaimanSubscriber=rospy.Subscriber("/Caiman_to_Raspberry",ButtonsStateMessage.ArduinoData,self.Command_buffer)
+        self.ControlSubscriber=rospy.Subscriber("/IMU_to_Raspberry",IMU,self.IMU_data_buffer)
+        self.CaimanSubscriber=rospy.Subscriber("/Caiman_to_Raspberry",raspberry,self.Command_buffer)
         
 
-        self.ArduinoPublisher=rospy.Publisher("/Rasp_to_Arduino",ButtonsStateMessage.ArduinoData,queue_size=10)
-        self.CaimanPublisher=rospy.Publisher("/Rasp_to_Caiman",Imu,queue_size=10)
+        self.ArduinoPublisher=rospy.Publisher("/Rasp_to_Arduino",raspberry,queue_size=10)
+        self.CaimanPublisher=rospy.Publisher("/Rasp_to_Caiman",IMU,queue_size=10)
         rospy.spin()
 
     def IMU_data_buffer(self,msg):

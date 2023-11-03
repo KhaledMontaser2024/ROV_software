@@ -9,10 +9,10 @@ import pygame
 import rospy
 import json
 from rov_system.msg import ButtonsStateMessage
-
+from std_msgs.msg import UInt8MultiArray
 class controller():
     def __init__(self) -> None:
-        
+
         #### initializing pygame and controller #####
         pygame.init()
         self.PS_Controller = pygame.joystick.Joystick(0)
@@ -40,6 +40,7 @@ class controller():
         while not rospy.is_shutdown():
             self.event_type_check()
             command_publisher.publish(self.ButtonsState)
+            #print(self.array)
         ################################################
 
         
