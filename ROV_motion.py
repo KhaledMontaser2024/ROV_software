@@ -1,18 +1,21 @@
+# this class is supposed to set the ROV motion by getting the controller inputs and IMU measured angels
+# to get the final thrusters speed output as an array of 8 floats call the "output" method and don't forget to pass the new values
+
 import PID_script
 class motion:
     def __init__(self, forward_backward, up_down, slide, yaw, pitch, max_speed, reverse_motion, measured_yaw_angle, measured_pitch_angle):
-        self.forward_backward = forward_backward
-        self.up_down = up_down
-        self.slide = slide
+        self.forward_backward = forward_backward         # controller forward    and backward float values range [2 : -2]
+        self.up_down = up_down                           # controller up         and down     float values range [1 : -1]
+        self.slide = slide                               # controller right      and left     float values range [1 : -1]
 
-        self.yaw = yaw
-        self.pitch = pitch
-
-        self.max_speed = max_speed
-        self.reverse_motion = reverse_motion
+        self.yaw = yaw                                   # controller yaw_right  and yaw_left float values range [1 : -1]
+        self.pitch = pitch                               # controller pitch_down and pitch_up float values range [1 : -1]
         
-        self.measured_yaw_angle = measured_yaw_angle
-        self.measured_pitch_angle = measured_pitch_angle
+        self.max_speed = max_speed                       # controller desired max_speed range [50 : 200]
+        self.reverse_motion = reverse_motion             # controller desired view "front camera view set it to 0" "back camera view set it to 1"
+        
+        self.measured_yaw_angle = measured_yaw_angle     # IMU measured yaw   angel
+        self.measured_pitch_angle = measured_pitch_angle # IMU measured pitch angel
 
         self.TFR = 0 # top front right
         self.TFL = 0 # top front left
@@ -24,11 +27,12 @@ class motion:
         self.BBR = 0 # bot back  right 
         self.BBL = 0 # bot back  left 
         
-        self.yaw_PID   =  PID_script.Pid(self.yaw, self.measured_yaw_angle, self.max_speed)
-        self.pitch_PID =  PID_script.Pid(self.pitch, self.measured_pitch_angle, self.max_speed)
+        self.yaw_PID   =  PID_script.Pid(self.yaw, self.measured_yaw_angle, self.max_speed)               # making PID_script object to control the yaw
+        self.pitch_PID =  PID_script.Pid(self.pitch, self.measured_pitch_angle, self.max_speed)           # making PID_script object to control the pitch
         
-        self.thrusters = [self.TFR, self.TFL, self.TBR, self.TBL, self.BFR, self.BFL, self.BBR, self.BBL]
-    
+        self.thrusters = [self.TFR, self.TFL, self.TBR, self.TBL, self.BFR, self.BFL, self.BBR, self.BBL] # making array of 8 floats to make it easier to transsfer thrusters data between the ROV and station
+
+    # the "motion_eqn" is the main motion method that adds the desired controller speed and direction
     def motion_eqn(self):
         if self.reverse_control == 0:
             self.thrusters[0] = (( self.forward_backward / 2) - self.slide - self.up_down  - self.yaw + self.pitch) * self.max_speed #TFR
