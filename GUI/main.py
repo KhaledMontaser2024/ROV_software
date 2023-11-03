@@ -16,7 +16,7 @@ QResource.registerResource("background.qrc")
 QResource.registerResource("logo.qrc")
 
 
-class GUI(QMainWindow):
+class GUI(QMainWindow): #main class
     def __init__(self, parent=None):
         super(GUI, self).__init__(parent)
         self.script_dir = os.path.abspath(os.path.dirname(__file__))
@@ -30,7 +30,7 @@ class GUI(QMainWindow):
         self.stop_mession_button.clicked.connect(self.stop_mession)
         self.reset_mession_button.clicked.connect(self.reset_mession)
 
-        self.switch_buttons.clicked.connect(self.switch_func)
+        self.switch_buttons.clicked.connect(self.switch_func)      #button used to switch between staked widget
 
         
         self.switch = 1   #used to switch between stacked wideget of timer and slider  
@@ -39,31 +39,31 @@ class GUI(QMainWindow):
 
 
         self.mession=QTimer()
-        self.mession.timeout.connect(self.update_mession)        
-        self.elapsed_time_mession = 0
+        self.mession.timeout.connect(self.update_mession)         #used to handel time of the mession
+        self.elapsed_time_mession = 0                              #count time in sec in the timer mession
 
 
 
         self.timer = QTimer()
-        self.timer.timeout.connect(self.update_display)
-        self.elapsed_time = 0
+        self.timer.timeout.connect(self.update_display)             #used to handel the min timer
+        self.elapsed_time = 0                                        #used to count sec in the main timer
 
     def start_timer(self):
         self.timer.start(1000)
       
 
-    def stop_timer(self):
+    def stop_timer(self):                        #used to stop the the main timer
        self.timer.stop()
 
-    def reset_timer(self):
+    def reset_timer(self):                 #used to reset the main timer
             self.timerlcd.display(0)
             self.elapsed_time=0
-            self.counter_mession=0
+            self.counter_time=0
             self.update_display()
   
-    def update_display(self):
+    def update_display(self):             #used to desplay  in the main timer
         self.elapsed_time += 1
-        if self.elapsed_time_mession %60 ==0 :
+        if self.elapsed_time %60 ==0 :
             self.counter_time+=1
             self.timerlcd.display(self.counter_time) 
 
@@ -72,7 +72,7 @@ class GUI(QMainWindow):
 
     def start_mession(self):
         self.mession.start(1000)
-    def update_mession(self):
+    def update_mession(self):         #used to update the desplay in the timer mession
          self.elapsed_time_mession += 1
          if self.elapsed_time_mession %60 ==0 :
             self.counter_time_mession+=1
@@ -81,7 +81,7 @@ class GUI(QMainWindow):
     def stop_mession(self):
        self.mession.stop()
 
-    def reset_mession(self):
+    def reset_mession(self):           # used to reset the mession timer
          self.timer_mession.display(0)
          self.elapsed_time_mession=0
          self.counter_time_mession=0
