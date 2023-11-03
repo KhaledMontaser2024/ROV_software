@@ -52,6 +52,8 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    ButtonsStateMessage.msg
    MotionMessage.msg
+   IMU.msg
+   raspberry.msg
  )
 
 ## Generate services in the 'srv' folder
