@@ -10,12 +10,13 @@
 
 import time
 class Pid():
-    def __init__(self,controller_signal,measured_angle) :
+    def __init__(self,controller_signal,measured_angle,maxspeed) :
         self.controller_signal = controller_signal
+        self.maxspeed=maxspeed
         self.ts=.100
         self.tau=.02
         self.measured_angle=measured_angle
-        self.error = 0  #e(n)
+        self.error = 0    #e(n)
         self.p_error = 0  #e(n-1)
         self.p_iterm = 0  #previous integral term "I(n-1)"
         self.p_dterm = 0  #previous derivative term "D(n-1)"
@@ -34,17 +35,17 @@ class Pid():
         else :
             pass
         if (self.setpoint - self.measured_angle )>180 :#choosing the smallest angle 
-            {
+            
                 self.measured_angle = self.measured_angle - 360  
-            }
+            
         elif (self.setpoint - self.measured_angle )<-180:
-            {
-                self.measured_angle = self.measured_angle +360 
-            }
+            
+                self.measured_angle  = self.measured_angle +360 
+            
         else :
-            {
-                self.measured_angle= self.measured_angle
-            }
+            
+                self.measured_angle = self.measured_angle
+            
         self.error = setpoint-self.measured_angle #e(n)
         return self.error
             
