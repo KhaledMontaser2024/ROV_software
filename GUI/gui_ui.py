@@ -461,9 +461,11 @@ class Ui_MainWindow(object):
         self.stackedWidget_2.setGeometry(QRect(500, 20, 511, 201))
         self.stackedWidget_2.setStyleSheet(u" QWidget QLabel {\n"
 "    background-color: transparent;\n"
-"color: rgb(255, 255, 255) ;\n"
+"\n"
+"color:white;\n"
 "	font: 75 16pt \"Ubuntu Condensed\";\n"
 "}\n"
+"\n"
 "border: 1px solid white;\n"
 "background-color:transparent ;\n"
 "")
@@ -498,24 +500,6 @@ class Ui_MainWindow(object):
         self.label_6.setStyleSheet(u"\n"
 "font: 75 15pt \"Ubuntu Condensed\";\n"
 "color :rgb(238, 238, 236)")
-        self.label_7 = QLabel(self.page_6)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setGeometry(QRect(20, 70, 141, 21))
-        self.label_7.setStyleSheet(u"\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"color :rgb(238, 238, 236)")
-        self.label_8 = QLabel(self.page_6)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setGeometry(QRect(20, 110, 141, 21))
-        self.label_8.setStyleSheet(u"\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"color :rgb(238, 238, 236)")
-        self.label_9 = QLabel(self.page_6)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setGeometry(QRect(20, 160, 141, 21))
-        self.label_9.setStyleSheet(u"\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"color :rgb(238, 238, 236)")
         self.label_10 = QLabel(self.page_6)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setGeometry(QRect(20, 210, 141, 21))
@@ -528,28 +512,10 @@ class Ui_MainWindow(object):
         self.label_11.setStyleSheet(u"\n"
 "font: 75 15pt \"Ubuntu Condensed\";\n"
 "color :rgb(238, 238, 236)")
-        self.label_12 = QLabel(self.page_6)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setGeometry(QRect(400, 10, 71, 21))
-        self.label_12.setStyleSheet(u"\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"color :rgb(238, 238, 236)")
-        self.label_13 = QLabel(self.page_6)
-        self.label_13.setObjectName(u"label_13")
-        self.label_13.setGeometry(QRect(400, 70, 71, 21))
-        self.label_13.setStyleSheet(u"\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"color :rgb(238, 238, 236)")
-        self.label_14 = QLabel(self.page_6)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setGeometry(QRect(400, 110, 71, 21))
-        self.label_14.setStyleSheet(u"\n"
-"font: 75 15pt \"Ubuntu Condensed\";\n"
-"color :rgb(238, 238, 236)")
-        self.label_15 = QLabel(self.page_6)
-        self.label_15.setObjectName(u"label_15")
-        self.label_15.setGeometry(QRect(400, 160, 71, 21))
-        self.label_15.setStyleSheet(u"\n"
+        self.YawKpLabel = QLabel(self.page_6)
+        self.YawKpLabel.setObjectName(u"YawKpLabel")
+        self.YawKpLabel.setGeometry(QRect(400, 10, 71, 21))
+        self.YawKpLabel.setStyleSheet(u"\n"
 "font: 75 15pt \"Ubuntu Condensed\";\n"
 "color :rgb(238, 238, 236)")
         self.label_16 = QLabel(self.page_6)
@@ -564,12 +530,6 @@ class Ui_MainWindow(object):
         self.label_17.setStyleSheet(u"\n"
 "font: 75 15pt \"Ubuntu Condensed\";\n"
 "color :rgb(238, 238, 236)")
-        self.horizontalSlider = QSlider(self.page_6)
-        self.horizontalSlider.setObjectName(u"horizontalSlider")
-        self.horizontalSlider.setGeometry(QRect(180, 150, 191, 31))
-        self.horizontalSlider.setStyleSheet(u"background-color :rgb(35, 35, 35) ;\n"
-"")
-        self.horizontalSlider.setOrientation(Qt.Horizontal)
         self.horizontalSlider_2 = QSlider(self.page_6)
         self.horizontalSlider_2.setObjectName(u"horizontalSlider_2")
         self.horizontalSlider_2.setGeometry(QRect(180, 10, 191, 31))
@@ -578,16 +538,94 @@ class Ui_MainWindow(object):
         self.horizontalSlider_2.setOrientation(Qt.Horizontal)
         self.horizontalSlider_3 = QSlider(self.page_6)
         self.horizontalSlider_3.setObjectName(u"horizontalSlider_3")
-        self.horizontalSlider_3.setGeometry(QRect(180, 60, 191, 31))
-        self.horizontalSlider_3.setStyleSheet(u"background-color :rgb(35, 35, 35) ;\n"
+        self.horizontalSlider_3.setGeometry(QRect(180, 40, 191, 31))
+        self.horizontalSlider_3.setStyleSheet(u"background-color:rgb(48, 48, 48) ;\n"
 "")
         self.horizontalSlider_3.setOrientation(Qt.Horizontal)
+        self.label_7 = QLabel(self.page_6)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setGeometry(QRect(20, 50, 141, 21))
+        self.label_7.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.YawKiLabel = QLabel(self.page_6)
+        self.YawKiLabel.setObjectName(u"YawKiLabel")
+        self.YawKiLabel.setGeometry(QRect(400, 40, 71, 21))
+        self.YawKiLabel.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
         self.horizontalSlider_4 = QSlider(self.page_6)
         self.horizontalSlider_4.setObjectName(u"horizontalSlider_4")
-        self.horizontalSlider_4.setGeometry(QRect(180, 100, 191, 31))
-        self.horizontalSlider_4.setStyleSheet(u"background-color :rgb(35, 35, 35) ;\n"
+        self.horizontalSlider_4.setGeometry(QRect(180, 70, 191, 31))
+        self.horizontalSlider_4.setStyleSheet(u"background-color:rgb(48, 48, 48) ;\n"
 "")
         self.horizontalSlider_4.setOrientation(Qt.Horizontal)
+        self.label_8 = QLabel(self.page_6)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setGeometry(QRect(20, 80, 141, 21))
+        self.label_8.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.YawKdLabel = QLabel(self.page_6)
+        self.YawKdLabel.setObjectName(u"YawKdLabel")
+        self.YawKdLabel.setGeometry(QRect(400, 70, 71, 21))
+        self.YawKdLabel.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.horizontalSlider_5 = QSlider(self.page_6)
+        self.horizontalSlider_5.setObjectName(u"horizontalSlider_5")
+        self.horizontalSlider_5.setGeometry(QRect(180, 100, 191, 31))
+        self.horizontalSlider_5.setStyleSheet(u"background-color:rgb(48, 48, 48) ;\n"
+"")
+        self.horizontalSlider_5.setOrientation(Qt.Horizontal)
+        self.label_9 = QLabel(self.page_6)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setGeometry(QRect(20, 110, 141, 21))
+        self.label_9.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.PitchKpLabel = QLabel(self.page_6)
+        self.PitchKpLabel.setObjectName(u"PitchKpLabel")
+        self.PitchKpLabel.setGeometry(QRect(400, 100, 71, 21))
+        self.PitchKpLabel.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.horizontalSlider_6 = QSlider(self.page_6)
+        self.horizontalSlider_6.setObjectName(u"horizontalSlider_6")
+        self.horizontalSlider_6.setGeometry(QRect(180, 130, 191, 31))
+        self.horizontalSlider_6.setStyleSheet(u"background-color:rgb(48, 48, 48) ;\n"
+"")
+        self.horizontalSlider_6.setOrientation(Qt.Horizontal)
+        self.label_34 = QLabel(self.page_6)
+        self.label_34.setObjectName(u"label_34")
+        self.label_34.setGeometry(QRect(20, 140, 141, 21))
+        self.label_34.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.PitchKiLabel = QLabel(self.page_6)
+        self.PitchKiLabel.setObjectName(u"PitchKiLabel")
+        self.PitchKiLabel.setGeometry(QRect(400, 130, 71, 21))
+        self.PitchKiLabel.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.horizontalSlider_7 = QSlider(self.page_6)
+        self.horizontalSlider_7.setObjectName(u"horizontalSlider_7")
+        self.horizontalSlider_7.setGeometry(QRect(180, 160, 191, 31))
+        self.horizontalSlider_7.setStyleSheet(u"background-color:rgb(48, 48, 48) ;\n"
+"")
+        self.horizontalSlider_7.setOrientation(Qt.Horizontal)
+        self.label_36 = QLabel(self.page_6)
+        self.label_36.setObjectName(u"label_36")
+        self.label_36.setGeometry(QRect(20, 170, 141, 21))
+        self.label_36.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
+        self.PitchKdLabel = QLabel(self.page_6)
+        self.PitchKdLabel.setObjectName(u"PitchKdLabel")
+        self.PitchKdLabel.setGeometry(QRect(400, 160, 71, 21))
+        self.PitchKdLabel.setStyleSheet(u"\n"
+"font: 75 15pt \"Ubuntu Condensed\";\n"
+"color :rgb(238, 238, 236)")
         self.stackedWidget_2.addWidget(self.page_6)
         self.label_22 = QLabel(self.page)
         self.label_22.setObjectName(u"label_22")
@@ -694,17 +732,21 @@ class Ui_MainWindow(object):
         self.toolButton_4.setText(QCoreApplication.translate("MainWindow", u"OFF", None))
         self.label_20.setText(QCoreApplication.translate("MainWindow", u"   TIMER", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Yaw Kp", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Yaw Ki", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Yaw Kd", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Pitch Kp", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Pitch Ki", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Pitch Kd", None))
-        self.label_12.setText(QCoreApplication.translate("MainWindow", u"value", None))
-        self.label_13.setText(QCoreApplication.translate("MainWindow", u"value", None))
-        self.label_14.setText(QCoreApplication.translate("MainWindow", u"value", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"value", None))
+        self.YawKpLabel.setText(QCoreApplication.translate("MainWindow", u"value", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"value", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"value", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Yaw Ki", None))
+        self.YawKiLabel.setText(QCoreApplication.translate("MainWindow", u"value", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Yaw Kd", None))
+        self.YawKdLabel.setText(QCoreApplication.translate("MainWindow", u"value", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Pitch Kp", None))
+        self.PitchKpLabel.setText(QCoreApplication.translate("MainWindow", u"value", None))
+        self.label_34.setText(QCoreApplication.translate("MainWindow", u"Pitch ki", None))
+        self.PitchKiLabel.setText(QCoreApplication.translate("MainWindow", u"value", None))
+        self.label_36.setText(QCoreApplication.translate("MainWindow", u"Pitch kd", None))
+        self.PitchKdLabel.setText(QCoreApplication.translate("MainWindow", u"value", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"Auto/Manual", None))
         self.start_timer_button.setText(QCoreApplication.translate("MainWindow", u"start", None))
         self.stop_timer_button.setText(QCoreApplication.translate("MainWindow", u"stop", None))
