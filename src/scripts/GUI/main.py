@@ -12,6 +12,8 @@ from background_rc import*
 from logo_rc import*
 from PyQt5.QtCore import QTime
 import os
+from caiman_node import Caiman
+from gui_ui import*
 QResource.registerResource("background.qrc")
 QResource.registerResource("logo.qrc")
 
@@ -22,6 +24,14 @@ class GUI(QMainWindow): #main class
         self.script_dir = os.path.abspath(os.path.dirname(__file__))
         self.gui_path = os.path.join(self.script_dir, 'gui.ui')        
         uic.loadUi(self.gui_path, self)
+        
+
+        self.GuiThreads = Caiman()
+        self.GuiThreads.start()
+        self.GuiThreads.SliderSignal.connect(self.update_sliders1)
+        self.GuiThreads.MotorsSpeed.connect(self.update_motors_speed)
+        self.GuiThreads.Angles.connect(self.update_angles)
+
 
         self.start_timer_button.clicked.connect(self.start_timer)
         self.stop_timer_button.clicked.connect(self.stop_timer)
@@ -99,27 +109,62 @@ class GUI(QMainWindow): #main class
 
     
     def setup_sliders(self):
-        self.horizontalSlider.setRange(0,20)
-        self.horizontalSlider_2.setRange(0,20)
-        self.horizontalSlider_3.setRange(0,20)
-        self.horizontalSlider_4.setRange(0,20)
-        self.horizontalSlider.setSingleStep(0.1)
-        self.horizontalSlider_2.setSingleStep(0.1)
-        self.horizontalSlider_3.setSingleStep(0.1)
-        self.horizontalSlider_4.setSingleStep(0.1)
-        self.horizontalSlider.valueChanged.connect(self.update_sliders1)
-        self.horizontalSlider_2.valueChanged.connect(self.update_sliders2)
-        self.horizontalSlider_3.valueChanged.connect(self.update_sliders3)
-        self.horizontalSlider_4.valueChanged.connect(self.update_sliders4)
+        self.YawKpSlider.setRange(0,20)
+        self.YawKiSlider.setRange(0,20)
+        self.YawKdSlider.setRange(0,20)
+        self.PitchKpSlider.setRange(0,20)
+        self.PitchKiSlider.setRange(0,20)
+        self.PitchKdSlider.setRange(0,20)
+        self.YawKpSlider.setSingleStep(0.1)
+        self.YawKiSlider.setSingleStep(0.1)
+        self.YawKdSlider.setSingleStep(0.1)
+        self.PitchKpSlider.setSingleStep(0.1)
+        self.PitchKiSlider.setSingleStep(0.1)
+        self.PitchKdSlider.setSingleStep(0.1)
 
     def update_sliders1(self,value):
-        self.label_15.setText(str(value))
-    def update_sliders2(self,value):
-        self.label_12.setText(str(value))
-    def update_sliders3(self,value):
-        self.label_13.setText(str(value))
-    def update_sliders4(self,value):
-        self.label_14.setText(str(value))
+        self.YawKpLabel.setText(str(value))
+        self.YawKiLabel.setText(str(value))
+        self.YawKdLabel.setText(str(value))
+        self.PitchKpLabel.setText(str(value))
+        self.PitchKiLabel.setText(str(value))
+        self.PitchKdLabel.setText(str(value))
+
+    def update_motors_speed(self,value):
+        self.TFR.display(value(0))
+        self.TFL.display(value(1))
+        self.BFR.display(value(2))
+        self.BFL.display(value(3))
+        self.TBR.display(value(4))
+        self.TBL.display(value(5))
+        self.BBR.display(value(6)) 
+        self.BBL.display(value(7)) 
+
+    def update_Grippers_Led(self,value):#dont know the data to get
+       if value&1 == 1:
+           self.toolButton.setStyleSheet("color:green") #setting the led
+       elif value&1==0:
+           self.toolButton_2.setStyleSheet("color:red")
+       if value&2 == 1:
+           self.toolButton_5.setStyleSheet("color:green") #setting first grip
+       elif value&2 == 0:
+           self.toolButton_6.setStyleSheet("color:red")
+       if value&4 == 1:
+            self.toolButton_8.setStyleSheet("color:green") #setting second grip
+       elif value&4 == 0:
+            self.toolButton_7.setStyleSheet("color:red")
+       if value&8 == 1:
+            self.toolButton_9.setStyleSheet("color:green") #setting third grip 
+       elif value&9 == 0:
+            self.toolButton_10.setStyleSheet("color:red")
+           
+    
+    def update_angles(self,value):
+        self.ui.widget.setValue(value.yaw_angle)
+        self.timer_7.display(value.pitch_angle)
+      #  self.timer_8.display(value) #Roll value not taken
+
+
     
     
         

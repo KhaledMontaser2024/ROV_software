@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1594</width>
-    <height>926</height>
+    <width>1782</width>
+    <height>914</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,8 +41,8 @@ border-image :url(:/logo/logo.png);
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>200</x>
+      <y>-40</y>
       <width>1576</width>
       <height>869</height>
      </rect>
@@ -1085,7 +1085,7 @@ color :white</string>
        </column>
        <column>
         <property name="text">
-         <string>mession</string>
+         <string>mission</string>
         </property>
        </column>
        <column>
@@ -1095,7 +1095,7 @@ color :white</string>
        </column>
        <item>
         <property name="text">
-         <string>mession1</string>
+         <string>mission1</string>
         </property>
         <property name="text">
          <string>what you want to do</string>
@@ -1106,7 +1106,7 @@ color :white</string>
        </item>
        <item>
         <property name="text">
-         <string>mession 2</string>
+         <string>mission 2</string>
         </property>
         <property name="text">
          <string>ay 7aga</string>
@@ -1117,7 +1117,7 @@ color :white</string>
        </item>
        <item>
         <property name="text">
-         <string>mession 3</string>
+         <string>mission 3</string>
         </property>
         <property name="text">
          <string>ay 7aga</string>
@@ -1128,7 +1128,7 @@ color :white</string>
        </item>
        <item>
         <property name="text">
-         <string>mession 4</string>
+         <string>mission 4</string>
         </property>
         <property name="text">
          <string>ay 7agaa</string>
@@ -1194,7 +1194,7 @@ color :rgb(238, 238, 236)</string>
        <string>OFF</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="LedLabel">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -1460,7 +1460,7 @@ color :rgb(238, 238, 236)</string>
          <string>value</string>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider_2">
+       <widget class="QSlider" name="YawKpSlider">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1477,7 +1477,7 @@ color :rgb(238, 238, 236)</string>
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider_3">
+       <widget class="QSlider" name="YawKiSlider">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1530,7 +1530,7 @@ color :rgb(238, 238, 236)</string>
          <string>value</string>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider_4">
+       <widget class="QSlider" name="YawKdSlider">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1583,7 +1583,7 @@ color :rgb(238, 238, 236)</string>
          <string>value</string>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider_5">
+       <widget class="QSlider" name="PitchKpSlider">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1636,7 +1636,7 @@ color :rgb(238, 238, 236)</string>
          <string>value</string>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider_6">
+       <widget class="QSlider" name="PitchKiSlider">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1689,7 +1689,7 @@ color :rgb(238, 238, 236)</string>
          <string>value</string>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider_7">
+       <widget class="QSlider" name="PitchKdSlider">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -1867,6 +1867,171 @@ color :rgb(238, 238, 236)</string>
       </property>
       <property name="text">
        <string>switch</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Grip1Label">
+      <property name="geometry">
+       <rect>
+        <x>1080</x>
+        <y>330</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>Gripper 1</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Grip2Label">
+      <property name="geometry">
+       <rect>
+        <x>1080</x>
+        <y>370</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>Gripper 2</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Grip3Label">
+      <property name="geometry">
+       <rect>
+        <x>1080</x>
+        <y>410</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>Gripper 3</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_5">
+      <property name="geometry">
+       <rect>
+        <x>1170</x>
+        <y>340</y>
+        <width>51</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color :rgb(7, 7, 7) ;
+
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>ON</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_6">
+      <property name="geometry">
+       <rect>
+        <x>1230</x>
+        <y>340</y>
+        <width>51</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color :rgb(7, 7, 7) ;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>OFF</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_7">
+      <property name="geometry">
+       <rect>
+        <x>1230</x>
+        <y>380</y>
+        <width>51</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color :rgb(7, 7, 7) ;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>OFF</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_8">
+      <property name="geometry">
+       <rect>
+        <x>1170</x>
+        <y>380</y>
+        <width>51</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color :rgb(7, 7, 7) ;
+
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>ON</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_9">
+      <property name="geometry">
+       <rect>
+        <x>1170</x>
+        <y>410</y>
+        <width>51</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color :rgb(7, 7, 7) ;
+
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>ON</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="toolButton_10">
+      <property name="geometry">
+       <rect>
+        <x>1230</x>
+        <y>410</y>
+        <width>51</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color :rgb(7, 7, 7) ;
+font: 75 15pt &quot;Ubuntu Condensed&quot;;
+color :rgb(238, 238, 236)</string>
+      </property>
+      <property name="text">
+       <string>OFF</string>
       </property>
      </widget>
     </widget>

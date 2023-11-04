@@ -14,14 +14,17 @@ from qtpy.QtCore import QThread,pyqtSignal
 class Caiman(QThread):
     def __init__(self) -> None:
 
-        self.signalcommand=pyqtSignal()
+        self.MotorsSpeed=pyqtSignal()
+        self.SliderSignal=pyqtSignal()
+        self.Grip_Led=pyqtSignal()
+        self.Angles=pyqtSignal
 
         ## variables to store msgs with ROS costom data types ##
         self.ImuReads=IMU()
         self.motion=raspberry()
         #########################################################
         
-        self.motionClass = motion(0,0,0,0,0,0,0,0,0)     # importing motion class for further use 
+        self.motionClass = motion()     # importing motion class for further use 
 
         rospy.init_node("Station_Node")
         
@@ -41,7 +44,9 @@ class Caiman(QThread):
 
     def commandsHandler(self, msg):
         
-        self.signalcommand.emit(self.motion)
+        self.MotorsSpeed.emit(self.motion)
+        self.SliderSignal.emit(self) #Dont know what to put here
+        self.Grip_Led.emit(self.motion.ArduinoData)
         ##### here we call motion method and pass its paramiters then store its returned list ###########
         self.motion = self.motionClass.output(msg.MotionData.Forward_Backward_Axis,msg.MotionData.Up_Down_Axis,msg.MotionData.Left_Right_Axis,msg.MotionData.Yaw_Axis,msg.MotionData.Pitch_Axis,msg.MotionData.Speed,msg.MotionData.Reverse_Control,self.ImuReads.yaw_angle,self.ImuReads.pitch_angle)
         self.motion.insert(8,msg.ArduinoData) #### at the same list we add (LED and Grippers signals)
@@ -55,5 +60,6 @@ class Caiman(QThread):
     ########## just buffer it to use in calling motion method   ###############
     def IMU_Handler (self,msg):
         self.ImuReads=msg
+        self.Angles.emit(self.ImuReads)
     ############################################################################
 
