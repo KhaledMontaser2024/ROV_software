@@ -30,6 +30,7 @@ class Caiman(QThread):
         
         ######################################### here we recive controller commands #################################### 
         self.ControllerSubscriber = rospy.Subscriber ("/Controller_to_caiman",ButtonsStateMessage,self.commandsHandler)
+        self.AutoSubscriber       = rospy.Subscriber ("/Controller_to_caiman_auto",ButtonsStateMessage,self.autoMotion)
         #################################################################################################################
 
         ############################### caiman - Raspberry nodes communication ########################
@@ -41,7 +42,9 @@ class Caiman(QThread):
         while True:
             pass
 
-
+    def autoMotion(self, msg):
+        pass
+    
     def commandsHandler(self, msg):
         
         self.MotorsSpeed.emit(self.motion)
