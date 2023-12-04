@@ -21,6 +21,7 @@ class controller():
 
         rospy.init_node("Controller_Node")
         command_publisher=rospy.Publisher("/Controller_to_caiman",ButtonsStateMessage,queue_size=10)
+        auto_publisher=rospy.Publisher("/Controller_to_caiman_auto",ButtonsStateMessage,queue_size=10)
 
         ########### json file that contains ps keys to easily manipulate them ######## 
         file = open('src/scripts/ps_keys.json', 'r+')
